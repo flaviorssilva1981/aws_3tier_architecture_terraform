@@ -3,7 +3,7 @@
 # YouTube   : https://www.youtube.com/c/ranjitswain
 # GitHub    : https://github.com/ranjit4github
 ########################################################
-/*
+
 resource "aws_network_acl" "main" {
   vpc_id = aws_vpc.main.id
 
@@ -68,4 +68,3 @@ resource "aws_network_acl_association" "main" {
   subnet_id      = aws_subnet.public.id
 }
 
-*/
