@@ -65,6 +65,7 @@ resource "aws_network_acl" "main" {
 
 resource "aws_network_acl_association" "main" {
   network_acl_id = aws_network_acl.main.id
-  subnet_id      = aws_subnet.public.id
+  subnet_id      = aws_subnet.public[count.index].id
+  count = 2
 }
 
