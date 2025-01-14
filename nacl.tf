@@ -7,6 +7,17 @@
 resource "aws_network_acl" "main" {
   vpc_id = aws_vpc.main.id
 
+
+  ingress {
+    protocol   = "all"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+/*
   ingress {
     protocol   = "tcp"
     rule_no    = 100
@@ -33,7 +44,18 @@ resource "aws_network_acl" "main" {
     to_port    = 22
   }
 
+*/
+
   egress {
+    protocol   = "all"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = "0.0.0.0/0"
+    from_port  = 0
+    to_port    = 0
+  }
+
+/*  egress {
     protocol   = "tcp"
     rule_no    = 100
     action     = "allow"
@@ -57,7 +79,7 @@ resource "aws_network_acl" "main" {
     from_port  = 1024
     to_port    = 65535
   }
-
+*/
   tags = {
     Name = "main"
   }
