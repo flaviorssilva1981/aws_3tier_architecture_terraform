@@ -5,7 +5,7 @@
 ########################################################
 
 resource "aws_instance" "web" {
-  ami           = "ami-0507f77897697c4ba"
+  ami           = "ami-05576a079321f21f8"
   instance_type = "t2.micro"
   key_name = "lab01"
   subnet_id = aws_subnet.public[count.index].id
@@ -31,7 +31,7 @@ resource "aws_instance" "web" {
 }
 
 resource "aws_instance" "db" {
-  ami           = "ami-0507f77897697c4ba"
+  ami           = "ami-05576a079321f21f8"
   instance_type = "t2.micro"
   key_name = "lab01"
   subnet_id = aws_subnet.private.id
