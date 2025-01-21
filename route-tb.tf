@@ -14,7 +14,8 @@ resource "aws_route_table" "rtb" {
 }
 
 resource "aws_route_table_association" "a" {
-  subnet_id      = aws_subnet.public[count.index].id
+#  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.public.id 
   route_table_id = aws_route_table.rtb.id
   count = 2
 }
