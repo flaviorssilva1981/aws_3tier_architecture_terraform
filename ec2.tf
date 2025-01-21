@@ -9,6 +9,11 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
   count = 2
 
+## User Data
+
+  user_data = file("/mnt/c/guga/projetos/aws/infra/aws_3tier_architecture_terraform/user_data.tpl")
+   
+
   tags = {
     Name = "WebServer"
   }
