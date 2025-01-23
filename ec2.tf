@@ -1,9 +1,9 @@
 
 
 resource "aws_instance" "web" {
-  ami           = "ami-05576a079321f21f8"
-  instance_type = "t2.micro"
-  key_name = "lab01"
+  ami           = var.ami-sandbox
+  instance_type = var.instance-type
+  key_name = var.key-name
 #  subnet_id = aws_subnet.public[count.index].id
   subnet_id = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
@@ -16,17 +16,17 @@ resource "aws_instance" "web" {
    
 
   tags = {
-    Name = "WebServer"
+    Name = var.tag
   }
 
   provisioner "file" {
-    source = "./lab01.pem"
-    destination = "/home/ec2-user/lab01.pem"
+    source = var.key-source
+    destination = var.key-destination
   
     connection {
-      type = "ssh"
+      type = var.key-type
       host = self.public_ip
-      user = "ec2-user"
+      user = var.user
       private_key = "${file("./lab01.pem")}"
     }  
   }
@@ -35,13 +35,13 @@ resource "aws_instance" "web" {
 # Create an EBS volume
 resource "aws_ebs_volume" "hanalog-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
-  size              = 12  # Size in GB
-  type              = "gp3"  # General Purpose SSD (You can change this to your preferred type)
+  size              = var.ebs-hanalog-size # Size in GB
+  type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
 }
 
 # Attach the EBS volume to the EC2 instance
 resource "aws_volume_attachment" "hanalog-attach" {
-  device_name = "/dev/sdf"  # You can change this to your preferred device name
+  device_name = var.ebs-hanalog-device-name  # You can change this to your preferred device name
   volume_id   = aws_ebs_volume.hanalog-ebs.id
   instance_id = aws_instance.web.id
 }

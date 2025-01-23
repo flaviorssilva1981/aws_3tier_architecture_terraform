@@ -15,3 +15,63 @@ data "aws_availability_zones" "available" {}
 data "aws_instance" "web" {
   instance_id = aws_instance.web.id # Replace with your instance ID
 }
+
+## AMI
+
+variable "ami-sandbox" {
+  default = "ami-05576a079321f21f8"
+}
+
+## Instance Type
+
+variable "instance-type" {
+  default = "t2.micro"
+}
+
+## Key
+
+variable "key-name" {
+  default = "lab01"
+}
+
+variable "key-source" {
+  default = "./lab01.pem"
+}
+
+variable "key-destination" {
+  default = "/home/ec2-user/lab01.pem"
+}
+
+variable "key-type" {
+  default = "ssh"
+}
+
+## User
+
+variable "user" {
+  default = "ec2-user"
+}
+
+
+## TAG
+
+variable "tag" {
+  default = "SandBox"
+}
+
+
+# EBS
+
+variable "ebs-hanalog-size" {
+  default = 12
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment
+
+variable "ebs-hanalog-device-name" {
+  default = "/dev/sdf"
+}
