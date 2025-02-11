@@ -12,7 +12,7 @@ variable "az" {
 
 data "aws_availability_zones" "available" {}
 # Data block to reference an existing EC2 instance by ID
-data "aws_instance" "web" {
+data "aws_instance" "sandbox01" {
   instance_id = aws_instance.sandbox01.id # Replace with your instance ID
 }
 
