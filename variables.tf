@@ -60,7 +60,9 @@ variable "tag" {
 }
 
 
-# EBS
+### EBS
+
+# EBS hanalog
 
 variable "ebs-hanalog-size" {
   default = 12
@@ -70,8 +72,91 @@ variable "ebs-type" {
   default = "gp3"
 }
 
-# EBS Attachment
+# EBS Attachment hanalog
 
 variable "ebs-hanalog-device-name" {
+  default = "/dev/sdb"
+}
+
+# EBS hanadata
+
+variable "ebs-hanadata-size" {
+  default = 61
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment hanadata
+
+variable "ebs-hanadata-device-name" {
+  default = "/dev/sdc"
+}
+
+
+# EBS hanashared
+
+variable "ebs-hanashared-size" {
+  default = 31
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment hanashared
+
+variable "ebs-hanashared-device-name" {
+  default = "/dev/sdd"
+}
+
+
+# EBS hanabackup
+
+variable "ebs-hanabackup-size" {
+  default = 51
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment hanabackup
+
+variable "ebs-hanabackup-device-name" {
+  default = "/dev/sde"
+}
+
+
+# EBS usrsap
+
+variable "ebs-usrsap-size" {
+  default = 41
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment usrsap
+
+variable "ebs-usrsap-device-name" {
   default = "/dev/sdf"
+}
+
+# EBS swap
+
+variable "ebs-swap-size" {
+  default = 16
+}
+
+variable "ebs-type" {
+  default = "gp3"
+}
+
+# EBS Attachment swap
+
+variable "ebs-swap-device-name" {
+  default = "/dev/sdg"
 }
