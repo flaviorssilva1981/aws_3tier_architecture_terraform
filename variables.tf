@@ -13,7 +13,7 @@ variable "az" {
 data "aws_availability_zones" "available" {}
 # Data block to reference an existing EC2 instance by ID
 data "aws_instance" "web" {
-  instance_id = aws_instance.web.id # Replace with your instance ID
+  instance_id = aws_instance.sandbox01.id # Replace with your instance ID
 }
 
 ## AMI
@@ -84,9 +84,11 @@ variable "ebs-hanadata-size" {
   default = 61
 }
 
+/*
 variable "ebs-type" {
   default = "gp3"
 }
+*/
 
 # EBS Attachment hanadata
 
@@ -101,9 +103,11 @@ variable "ebs-hanashared-size" {
   default = 31
 }
 
+/*
 variable "ebs-type" {
   default = "gp3"
 }
+*/
 
 # EBS Attachment hanashared
 
@@ -118,9 +122,11 @@ variable "ebs-hanabackup-size" {
   default = 51
 }
 
+/*
 variable "ebs-type" {
   default = "gp3"
 }
+*/
 
 # EBS Attachment hanabackup
 
@@ -135,9 +141,11 @@ variable "ebs-usrsap-size" {
   default = 41
 }
 
+/*
 variable "ebs-type" {
   default = "gp3"
 }
+*/
 
 # EBS Attachment usrsap
 
@@ -151,9 +159,11 @@ variable "ebs-swap-size" {
   default = 16
 }
 
+/*
 variable "ebs-type" {
   default = "gp3"
 }
+*/
 
 # EBS Attachment swap
 
