@@ -137,5 +137,9 @@ sudo mkfs.xfs /dev/vgswap/lvswap
 sudo mkdir -p /swap
 # Mount the volume
 sudo mount /dev/vgswap/lvswap /swap
+# Make a swap
+mkswap /dev/vgswap/lvswap
+# Tun swap on
+swapon /dev/vgswap/lvswap
 # Add to /etc/fstab for automatic mount on boot
 sudo echo '/dev/vgswap/lvswap /swap xfs defaults,nofail 0 0' >> /etc/fstab
