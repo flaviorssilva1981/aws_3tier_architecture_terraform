@@ -1,8 +1,21 @@
 #!/bin/bash
 
+# Register Suse Cloud
+
+SUSEConnect --de-register
+SUSEConnect --cleanup
+rm -f /etc/SUSEConnect
+rm -rf /etc/zypp/credentials.d/*
+rm -rf /etc/zypp/repos.d/*
+rm -f /etc/zypp/services.d/*
+registercloudguest
+sleep 3
+zypper refresh
+sleep 2
+
 # Partition the volume /hana/log
 
-sudo yum install lvm2 -y
+sudo zypper install -y lvm2
 sudo sleep 2
 sudo parted /dev/xvdb --script mklabel gpt
 sudo parted /dev/xvdb --script mkpart primary 0% 100%
@@ -26,8 +39,8 @@ sudo echo '/dev/vghanalog/lvhanalog /hana/log xfs defaults,nofail 0 0' >> /etc/f
 
 # Partition the volume /hana/data
 
-sudo yum install lvm2 -y
-sudo sleep 2
+#sudo yum install lvm2 -y
+#sudo sleep 2
 sudo parted /dev/xvdc --script mklabel gpt
 sudo parted /dev/xvdc --script mkpart primary 0% 100%
 sudo parted /dev/xvdc set 1 lvm on
@@ -49,8 +62,8 @@ sudo echo '/dev/vghanadata/lvhanadata /hana/data xfs defaults,nofail 0 0' >> /et
 
 # Partition the volume /hana/shared
 
-sudo yum install lvm2 -y
-sudo sleep 2
+#sudo yum install lvm2 -y
+#sudo sleep 2
 sudo parted /dev/xvdd --script mklabel gpt
 sudo parted /dev/xvdd --script mkpart primary 0% 100%
 sudo parted /dev/xvdd set 1 lvm on
@@ -72,8 +85,8 @@ sudo echo '/dev/vghanashared/lvhanashared /hana/shared xfs defaults,nofail 0 0' 
 
 # Partition the volume /hana/backup
 
-sudo yum install lvm2 -y
-sudo sleep 2
+#sudo yum install lvm2 -y
+#sudo sleep 2
 sudo parted /dev/xvde --script mklabel gpt
 sudo parted /dev/xvde --script mkpart primary 0% 100%
 sudo parted /dev/xvde set 1 lvm on
@@ -96,8 +109,8 @@ sudo echo '/dev/vghanabackup/lvhanabackup /hana/backup xfs defaults,nofail 0 0' 
 
 # Partition the volume /usr/sap
 
-sudo yum install lvm2 -y
-sudo sleep 2
+#sudo yum install lvm2 -y
+#sudo sleep 2
 sudo parted /dev/xvdf --script mklabel gpt
 sudo parted /dev/xvdf --script mkpart primary 0% 100%
 sudo parted /dev/xvdf set 1 lvm on
@@ -119,8 +132,8 @@ sudo echo '/dev/vgusrsap/lvusrsap /usr/sap xfs defaults,nofail 0 0' >> /etc/fsta
 
 # Partition the volume swap
 
-sudo yum install lvm2 -y
-sudo sleep 2
+#sudo yum install lvm2 -y
+#sudo sleep 2
 sudo parted /dev/xvdg --script mklabel gpt
 sudo parted /dev/xvdg --script mkpart primary 0% 100%
 sudo parted /dev/xvdg set 1 lvm on
@@ -142,6 +155,6 @@ mkswap /dev/vgswap/lvswap
 # Tun swap on
 swapon
 # Verify if swap is on
-#swapon -v /dev/mapper/vgswap-lvswap
+swapon -v /dev/mapper/vgswap-lvswap
 # Add to /etc/fstab for automatic mount on boot
-sudo echo '/dev/vgswap/lvswap /swap xfs defaults,nofail 0 0' >> /etc/fstab
+sudo echo '/dev/vgswap/lvswap swap swap defaults,nofail 0 0' >> /etc/fstab

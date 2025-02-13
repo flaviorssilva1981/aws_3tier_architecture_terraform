@@ -19,7 +19,7 @@ data "aws_instance" "sandbox01" {
 ## AMI
 
 variable "ami-sandbox" {
-  default = "ami-05576a079321f21f8"
+  default = "ami-00fd7a6563f4b004f"
 }
 
 ## Instance Type
