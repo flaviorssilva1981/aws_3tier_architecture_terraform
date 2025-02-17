@@ -158,3 +158,8 @@ swapon
 swapon -v /dev/mapper/vgswap-lvswap
 # Add to /etc/fstab for automatic mount on boot
 sudo echo '/dev/vgswap/lvswap swap swap defaults,nofail 0 0' >> /etc/fstab
+
+
+## Create user and key
+
+

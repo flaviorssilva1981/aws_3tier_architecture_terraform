@@ -81,10 +81,31 @@ resource "aws_network_acl" "main" {
   }
 }
 
-resource "aws_network_acl_association" "main" {
+resource "aws_network_acl_association" "main-01" {
   network_acl_id = aws_network_acl.main.id
 #  subnet_id      = aws_subnet.public[count.index].id
-  subnet_id      = aws_subnet.public.id
+  subnet_id      = aws_subnet.sub-public-01.id
 #  count = 2
 }
 
+resource "aws_network_acl_association" "main-02" {
+  network_acl_id = aws_network_acl.main.id
+#  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.sub-public-02.id
+#  count = 2
+}
+
+resource "aws_network_acl_association" "main-03" {
+  network_acl_id = aws_network_acl.main.id
+#  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.sub-private-01.id
+#  count = 2
+}
+
+
+resource "aws_network_acl_association" "main-04" {
+  network_acl_id = aws_network_acl.main.id
+#  subnet_id      = aws_subnet.public[count.index].id
+  subnet_id      = aws_subnet.sub-private-02.id
+#  count = 2
+}

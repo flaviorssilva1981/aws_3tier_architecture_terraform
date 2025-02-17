@@ -1,13 +1,41 @@
-variable "cidr" {
-#  type = list
-#  default = ["10.0.1.0/24","10.0.2.0/24"]
-default = "10.0.1.0/24"
+#### VPC
+
+variable "vpc-cidr" {
+default = "10.0.169.0/24"
 }
 
-variable "az" {
+#### Subnets
+
+variable "sub-pub-cidr-01" {
+#  type = list
+#  default = ["10.0.169.0/28","10.0.169.128/28","10.0.169.16/28","10.0.169.144/28"]
+default = "10.0.169.0/28"
+}
+
+variable "sub-pub-cidr-02" {
+default = "10.0.169.128/28"
+}
+
+variable "sub-pri-cidr-01" {
+default = "10.0.169.16/28"
+}
+
+variable "sub-pri-cidr-02" {
+default = "10.0.169.144/28"
+}
+
+#### Availability Zones
+
+variable "az-01" {
 #  type = list
 #  default = ["us-east-1a","us-east-1c"]
   default = "us-east-1a"
+}
+
+
+variable "az-02" {
+#  type = list
+  default = "us-east-1c"
 }
 
 data "aws_availability_zones" "available" {}

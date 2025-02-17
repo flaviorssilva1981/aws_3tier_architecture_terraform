@@ -4,9 +4,9 @@ resource "aws_instance" "sandbox01" {
   ami           = var.ami-sandbox
   instance_type = var.instance-type
   key_name = var.key-name
-#  subnet_id = aws_subnet.public[count.index].id
-  subnet_id = aws_subnet.public.id
-  vpc_security_group_ids = [aws_security_group.allow_tls.id]
+#  subnet_id = aws_subnet.sub-public[count.index].id
+  subnet_id = aws_subnet.sub-public-01.id
+  vpc_security_group_ids = [aws_security_group.sg-private.id]
   associate_public_ip_address = true
 #  count = 2
 
