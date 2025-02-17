@@ -32,7 +32,6 @@ variable "az-01" {
   default = "us-east-1a"
 }
 
-
 variable "az-02" {
 #  type = list
   default = "us-east-1c"
@@ -80,15 +79,25 @@ variable "user" {
   default = "ec2-user"
 }
 
+## EC2 Instance Name
 
-## TAG
-
-variable "tag" {
+variable "instance-name" {
   default = "SandBox"
 }
 
 
-### EBS
+#### Create a volumes EBS
+
+# EBS boot
+
+variable "ebs-boot-size" {
+  default = 150
+}
+
+variable "boot-name" {
+  default = "/"
+}
+
 
 # EBS hanalog
 
@@ -198,3 +207,32 @@ variable "ebs-type" {
 variable "ebs-swap-device-name" {
   default = "/dev/sdg"
 }
+
+#### VPC Peering - MIGNOW
+
+variable "mig-peering-name" {
+  default = "COOPERCITRUS <==> MIGNOW"
+}
+
+variable "mig-account-id" {
+  default = "542645490141"
+}
+
+variable "mig-vpc-id" {
+  default = "vpc-0160249f18e6c2891"
+}
+
+#### VPC Peering - INFRACLOUD
+
+variable "infra-peering-name" {
+  default = "COOPERCITRUS <==> INFRACLOUD"
+}
+
+variable "infra-account-id" {
+  default = "081615871559"
+}
+
+variable "infra-vpc-id" {
+  default = "vpc-02bc2026b34bf4e8b"
+}
+

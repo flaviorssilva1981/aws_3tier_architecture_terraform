@@ -13,6 +13,20 @@ resource "aws_route_table" "rtb-pub" {
   }
 }
 
+# Route to MIGNOW VPC Peering
+resource "aws_route" "route_to_peer-mig" {
+  route_table_id            = aws_route_table.rtb-pub.id  # The ID of the route table you want to update
+  destination_cidr_block    = "10.200.100.0/24"  # The CIDR block you want to route to via the peering connection
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer_connection-mig.id  # Reference the peering connection ID
+}
+
+# Route to INFRACLOUD VPC Peering
+resource "aws_route" "route_to_peer-infra" {
+  route_table_id            = aws_route_table.rtb-pub.id  # The ID of the route table you want to update
+  destination_cidr_block    = "10.240.32.0/20"  # The CIDR block you want to route to via the peering connection
+  vpc_peering_connection_id = aws_vpc_peering_connection.peer_connection-infra.id  # Reference the peering connection ID
+}
+
 resource "aws_route_table_association" "a" {
 #  subnet_id      = aws_subnet.sub-public[count.index].id
   subnet_id      = aws_subnet.sub-public-01.id 

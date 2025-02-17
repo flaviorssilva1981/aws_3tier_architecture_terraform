@@ -10,12 +10,24 @@ resource "aws_instance" "sandbox01" {
   associate_public_ip_address = true
 #  count = 2
 
+  # Define EBS block device with 150 GB
+  root_block_device {
+#    device_name = var.boot-name
+    volume_size = var.ebs-boot-size  # Size in GB
+    volume_type = var.ebs-type  # General Purpose SSD; change if needed
+    delete_on_termination = true
+  }
+
+# Attach IAM Role to EC2 Instance
+
+  iam_instance_profile = aws_iam_instance_profile.ec2_s3_instance_profile.name
+
 ## User Data
 
   user_data = file("/mnt/c/guga/projetos/aws/infra/aws_3tier_architecture_terraform/user_data_02.tpl")
 
   tags = {
-    Name = var.tag
+    Name = var.instance-name
   }
 
   provisioner "file" {
@@ -30,6 +42,13 @@ resource "aws_instance" "sandbox01" {
     }  
   }
 }
+
+# Create IAM Instance Profile for EC2 instance
+resource "aws_iam_instance_profile" "ec2_s3_instance_profile" {
+  name = "ec2_s3_instance_profile"
+  role = aws_iam_role.ec2_s3_role.name
+}
+
 
 # Create an EBS volume hanalog
 resource "aws_ebs_volume" "hanalog-ebs" {
