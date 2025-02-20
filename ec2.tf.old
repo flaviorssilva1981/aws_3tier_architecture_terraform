@@ -55,6 +55,10 @@ resource "aws_ebs_volume" "hanalog-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-hanalog-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+  tags = {
+    Name = var.ebs-hanalog-name
+  }  
+
 }
 
 # Attach the EBS volume hanalog to the EC2 instance
@@ -70,6 +74,11 @@ resource "aws_ebs_volume" "hanadata-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-hanadata-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-hanadata-name
+  } 
+
 }
 
 # Attach the EBS volume hanadata to the EC2 instance
@@ -84,6 +93,11 @@ resource "aws_ebs_volume" "hanashared-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-hanashared-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-hanashared-name
+  } 
+
 }
 
 # Attach the EBS volume hanashared to the EC2 instance
@@ -98,6 +112,11 @@ resource "aws_ebs_volume" "hanabackup-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-hanabackup-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-hanabackup-name
+  } 
+
 }
 
 # Attach the EBS volume hanabackup to the EC2 instance
@@ -112,6 +131,11 @@ resource "aws_ebs_volume" "usrsap-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-usrsap-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-usrsap-name
+  } 
+
 }
 
 # Attach the EBS volume usrsap to the EC2 instance
@@ -127,6 +151,11 @@ resource "aws_ebs_volume" "swap-ebs" {
   availability_zone = data.aws_availability_zones.available.names[0]  # First AZ
   size              = var.ebs-swap-size # Size in GB
   type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-swap-name
+  } 
+
 }
 
 # Attach the EBS volume swap to the EC2 instance

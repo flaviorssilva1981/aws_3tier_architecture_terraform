@@ -1,4 +1,6 @@
+#### Public Subnets
 
+# Public Subnet 01
 
 resource "aws_subnet" "sub-public-01" {
   vpc_id     = aws_vpc.main.id
@@ -10,22 +12,11 @@ resource "aws_subnet" "sub-public-01" {
 #  count = 2
 
   tags = {
-    Name = "public-sub-01"
+    Name = var.public-sub-name-01
   }
 }
 
-resource "aws_subnet" "sub-private-01" {
-  vpc_id     = aws_vpc.main.id
-#  cidr_block = var.sub-cidr[count.index]  
-  cidr_block = var.sub-pri-cidr-01
-  availability_zone = var.az-01
-#  availability_zone = var.az[count.index]
-#  count = 2
-  tags = {
-    Name = "private-sub-01"
-  }
-}
-
+# Public Subnet 02
 
 resource "aws_subnet" "sub-public-02" {
   vpc_id     = aws_vpc.main.id
@@ -37,9 +28,25 @@ resource "aws_subnet" "sub-public-02" {
 #  count = 2
 
   tags = {
-    Name = "public-sub-02"
+    Name = var.public-sub-name-02
   }
 }
+
+# Private Subnet 01
+
+resource "aws_subnet" "sub-private-01" {
+  vpc_id     = aws_vpc.main.id
+#  cidr_block = var.sub-cidr[count.index]  
+  cidr_block = var.sub-pri-cidr-01
+  availability_zone = var.az-01
+#  availability_zone = var.az[count.index]
+#  count = 2
+  tags = {
+    Name = var.private-sub-name-01
+  }
+}
+
+# Private Subnet 02
 
 resource "aws_subnet" "sub-private-02" {
   vpc_id     = aws_vpc.main.id
@@ -49,12 +56,9 @@ resource "aws_subnet" "sub-private-02" {
 #  availability_zone = var.az[count.index]
 #  count = 2
   tags = {
-    Name = "private-sub-02"
+    Name = var.private-sub-name-02
   }
 }
-
-
-
 
 data "aws_subnets" "sid" {
   filter {

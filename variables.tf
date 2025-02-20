@@ -4,7 +4,13 @@ variable "vpc-cidr" {
 default = "10.0.169.0/24"
 }
 
-#### Subnets
+variable "vpc-name" {
+default = "Sandbox-VPC"
+}
+
+#### Public Subnets
+
+# Public Subnet 01
 
 variable "sub-pub-cidr-01" {
 #  type = list
@@ -12,17 +18,42 @@ variable "sub-pub-cidr-01" {
 default = "10.0.169.0/28"
 }
 
+variable "public-sub-name-01" {
+default = "Public-Subnet-01"
+}
+
+# Public Subnet 02
+
 variable "sub-pub-cidr-02" {
 default = "10.0.169.128/28"
 }
+
+variable "public-sub-name-02" {
+default = "Public-Subnet-02"
+}
+
+#### Private Subnets
+
+# Private Subnet 01
 
 variable "sub-pri-cidr-01" {
 default = "10.0.169.16/28"
 }
 
+variable "private-sub-name-01" {
+default = "Private-Subnet-01"
+}
+
+# Private Subnet 02
+
 variable "sub-pri-cidr-02" {
 default = "10.0.169.144/28"
 }
+
+variable "private-sub-name-02" {
+default = "Private-Subnet-02"
+}
+
 
 #### Availability Zones
 
@@ -38,11 +69,13 @@ variable "az-02" {
 }
 
 data "aws_availability_zones" "available" {}
+
+/*
 # Data block to reference an existing EC2 instance by ID
 data "aws_instance" "sandbox01" {
   instance_id = aws_instance.sandbox01.id # Replace with your instance ID
 }
-
+*/
 ## AMI
 
 variable "ami-sandbox" {
@@ -58,7 +91,7 @@ variable "instance-type" {
 ## Key
 
 variable "key-name" {
-  default = "lab01"
+  default = "sandbox-key"
 }
 
 variable "key-source" {
@@ -109,6 +142,11 @@ variable "ebs-type" {
   default = "gp3"
 }
 
+variable "ebs-hanalog-name" {
+  default = "/hana/log"
+}
+
+
 # EBS Attachment hanalog
 
 variable "ebs-hanalog-device-name" {
@@ -119,6 +157,10 @@ variable "ebs-hanalog-device-name" {
 
 variable "ebs-hanadata-size" {
   default = 61
+}
+
+variable "ebs-hanadata-name" {
+  default = "/hana/data"
 }
 
 /*
@@ -140,6 +182,10 @@ variable "ebs-hanashared-size" {
   default = 31
 }
 
+variable "ebs-hanashared-name" {
+  default = "/hana/shared"
+}
+
 /*
 variable "ebs-type" {
   default = "gp3"
@@ -157,6 +203,10 @@ variable "ebs-hanashared-device-name" {
 
 variable "ebs-hanabackup-size" {
   default = 51
+}
+
+variable "ebs-hanabackup-name" {
+  default = "/hana/backup"
 }
 
 /*
@@ -178,6 +228,11 @@ variable "ebs-usrsap-size" {
   default = 41
 }
 
+variable "ebs-usrsap-name" {
+  default = "/usr/sap"
+}
+
+
 /*
 variable "ebs-type" {
   default = "gp3"
@@ -194,6 +249,10 @@ variable "ebs-usrsap-device-name" {
 
 variable "ebs-swap-size" {
   default = 16
+}
+
+variable "ebs-swap-name" {
+  default = "/swap"
 }
 
 /*
@@ -236,3 +295,19 @@ variable "infra-vpc-id" {
   default = "vpc-02bc2026b34bf4e8b"
 }
 
+#### Elastic IP for NAT Gateway
+
+variable "eip-nat-gw" {
+  default = "NAT Gateway Elastic IP"
+}
+
+
+#### Bucket AWS S3
+
+variable "bucket-name" {
+  default = "coopercitrus-bucket"
+}
+
+variable "bucket-folder" {
+  default = "backup-hana/"
+}
