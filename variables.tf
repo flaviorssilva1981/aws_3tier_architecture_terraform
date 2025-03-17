@@ -65,17 +65,17 @@ variable "az-01" {
 
 variable "az-02" {
 #  type = list
-  default = "us-east-1c"
+  default = "us-east-1f"
 }
 
 data "aws_availability_zones" "available" {}
 
-/*
+
 # Data block to reference an existing EC2 instance by ID
 data "aws_instance" "sandbox01" {
   instance_id = aws_instance.sandbox01.id # Replace with your instance ID
 }
-*/
+
 ## AMI
 
 variable "ami-sandbox" {
@@ -85,7 +85,7 @@ variable "ami-sandbox" {
 ## Instance Type
 
 variable "instance-type" {
-  default = "t2.micro"
+  default = "x2iedn.32xlarge"
 }
 
 ## Key
@@ -115,7 +115,7 @@ variable "user" {
 ## EC2 Instance Name
 
 variable "instance-name" {
-  default = "SandBox"
+  default = "SandBox-Coopercitrus"
 }
 
 
@@ -135,7 +135,7 @@ variable "boot-name" {
 # EBS hanalog
 
 variable "ebs-hanalog-size" {
-  default = 12
+  default = 250
 }
 
 variable "ebs-type" {
@@ -156,7 +156,7 @@ variable "ebs-hanalog-device-name" {
 # EBS hanadata
 
 variable "ebs-hanadata-size" {
-  default = 61
+  default = 5001
 }
 
 variable "ebs-hanadata-name" {
@@ -179,7 +179,7 @@ variable "ebs-hanadata-device-name" {
 # EBS hanashared
 
 variable "ebs-hanashared-size" {
-  default = 31
+  default = 251
 }
 
 variable "ebs-hanashared-name" {
@@ -202,7 +202,7 @@ variable "ebs-hanashared-device-name" {
 # EBS hanabackup
 
 variable "ebs-hanabackup-size" {
-  default = 51
+  default = 5000
 }
 
 variable "ebs-hanabackup-name" {
@@ -225,7 +225,7 @@ variable "ebs-hanabackup-device-name" {
 # EBS usrsap
 
 variable "ebs-usrsap-size" {
-  default = 41
+  default = 200
 }
 
 variable "ebs-usrsap-name" {
@@ -248,7 +248,7 @@ variable "ebs-usrsap-device-name" {
 # EBS swap
 
 variable "ebs-swap-size" {
-  default = 16
+  default = 151
 }
 
 variable "ebs-swap-name" {
