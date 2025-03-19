@@ -16,6 +16,10 @@ resource "aws_instance" "sandbox01" {
     volume_size = var.ebs-boot-size  # Size in GB
     volume_type = var.ebs-type  # General Purpose SSD; change if needed
     delete_on_termination = true
+    # Tags for the root volume
+    tags = {
+      Name = "/"
+    }    
   }
 
 # Attach IAM Role to EC2 Instance
@@ -153,6 +157,27 @@ resource "aws_ebs_volume" "usrsap-ebs" {
 resource "aws_volume_attachment" "usrsap-attach" {
   device_name = var.ebs-usrsap-device-name  # You can change this to your preferred device name
   volume_id   = aws_ebs_volume.usrsap-ebs.id
+  instance_id = aws_instance.sandbox01.id
+}
+
+
+# Create an EBS volume sapmnt
+resource "aws_ebs_volume" "sapmnt-ebs" {
+  availability_zone = var.az-02  # First AZ
+  size              = var.ebs-sapmnt-size # Size in GB
+  type              = var.ebs-type  # General Purpose SSD (You can change this to your preferred type)
+
+  tags = {
+    Name = var.ebs-sapmnt-name
+  } 
+
+}
+
+
+# Attach the EBS volume sapmnt to the EC2 instance
+resource "aws_volume_attachment" "sapmnt-attach" {
+  device_name = var.ebs-sapmnt-device-name  # You can change this to your preferred device name
+  volume_id   = aws_ebs_volume.sapmnt-ebs.id
   instance_id = aws_instance.sandbox01.id
 }
 

@@ -130,6 +130,31 @@ sudo mount /dev/vgusrsap/lvusrsap /usr/sap
 # Add to /etc/fstab for automatic mount on boot
 sudo echo '/dev/vgusrsap/lvusrsap /usr/sap xfs defaults,nofail 0 0' >> /etc/fstab
 
+
+# Partition the volume /sapmnt
+
+#sudo yum install lvm2 -y
+#sudo sleep 2
+sudo parted /dev/nvme9n1 --script mklabel gpt
+sudo parted /dev/nvme9n1 --script mkpart primary 0% 100%
+sudo parted /dev/nvme9n1 set 1 lvm on
+sudo partprobe /dev/nvme9n1
+# Create Physical Volume (PV)
+sudo pvcreate /dev/nvme9n1p1
+# Create Volume Group (VG)
+sudo vgcreate vgsapmnt /dev/nvme9n1p1
+# Create Logical Volume (LV)
+sudo lvcreate -l 100%FREE vgsapmnt -n lvsapmnt
+# Format the Logical Volume with XFS
+sudo mkfs.xfs /dev/vgsapmnt/lvsapmnt
+# Create mount point
+sudo mkdir -p /sapmnt
+# Mount the volume
+sudo mount /dev/vgsapmnt/lvsapmnt /sapmnt
+# Add to /etc/fstab for automatic mount on boot
+sudo echo '/dev/vgsapmnt/lvsapmnt /sapmnt xfs defaults,nofail 0 0' >> /etc/fstab
+
+
 # Partition the volume swap
 
 #sudo yum install lvm2 -y

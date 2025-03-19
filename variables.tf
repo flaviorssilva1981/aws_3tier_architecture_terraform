@@ -245,6 +245,31 @@ variable "ebs-usrsap-device-name" {
   default = "/dev/sdf"
 }
 
+
+# EBS sapmnt
+
+variable "ebs-sapmnt-size" {
+  default = 25
+}
+
+variable "ebs-sapmnt-name" {
+  default = "/sapmnt"
+}
+
+
+/*
+variable "ebs-type" {
+  default = "gp3"
+}
+*/
+
+# EBS Attachment sapmnt
+
+variable "ebs-sapmnt-device-name" {
+  default = "/dev/sdh"
+}
+
+
 # EBS swap
 
 variable "ebs-swap-size" {
